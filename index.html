@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timers</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="col-1">
+        <div class="wrapper">
+          <h1 class="countHeading font">
+            Session
+            <span id="count">1/12</span>
+          </h1>
+          <h1 onclick="pause()" class="font timerHeading color1 shadow">
+            <span id="timer">00:00:00</span>
+          </h1>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="wrapper">
+          <h2 class="font dateHeading">
+            <span id="time">00:00</span> ~ <span id="date">04/07</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <!-- <img class="bg-image" src="/transparent.png" /> -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

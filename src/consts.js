@@ -1,0 +1,4 @@
+const MAX_SESSIONS = 11;
+const SESSION_LENGTH = 50 * 60;
+
+export { MAX_SESSIONS, SESSION_LENGTH };
