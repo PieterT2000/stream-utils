@@ -27,9 +27,9 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
-  background: none transparent!important;
-  overflow: hidden!important;
-  color: #000000
+  background: none transparent !important;
+  overflow: hidden !important;
+  color: #000000;
 }
 
 #app {
@@ -67,32 +67,41 @@ h2 {
 }
 
 .shadow {
-  text-shadow: #FFFEC8 0 -1px 0, #ff3a00 1px 1px 0, #c01c01 2px 2px 0, #bf1b01 3px 3px 0, #e90b20 4px 4px 0, #850103 5px 5px 0, #333 5px 5px 10px;
-
+  text-shadow: #fffec8 0 -1px 0, #ff3a00 1px 1px 0, #c01c01 2px 2px 0,
+    #bf1b01 3px 3px 0, #e90b20 4px 4px 0, #850103 5px 5px 0, #333 5px 5px 10px;
 }
 
 .color1 {
-  color: #FFF2F0;
+  color: #fff2f0;
 }
 
-.font {
-  font-family: 'DS-Digital', sans-serif;
+.font,
+.font h1,
+.font span {
+  font-family: "DS-Digital", sans-serif;
 }
 
 .timerHeading {
-  font-size: 100px; 
+  font-size: 100px;
   display: flex;
 }
 
 .countHeading {
-  font-size: 55px; 
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 350px;
+}
+.countHeading h1,
+.countHeading #count {
+  display: flex;
+  font-size: 55px;
+  line-height: 55px;
 }
 
 .countHeading #count {
   letter-spacing: 2px;
+  line-height: 55px;
 }
 
 .dateHeading {
@@ -130,10 +139,10 @@ button {
   -moz-transition: border-color 0.25s;
   -ms-transition: border-color 0.25s;
   -o-transition: border-color 0.25s;
-  -webkit-border-radius:;
-  -moz-border-radius:;
-  -ms-border-radius:;
-  -o-border-radius:;
+  -webkit-border-radius: ;
+  -moz-border-radius: ;
+  -ms-border-radius: ;
+  -o-border-radius: ;
 }
 button:hover {
   border-color: #646cff;

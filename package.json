@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "python -m http.server -d dist 7777"
   },
   "devDependencies": {
     "vite": "^4.3.9"

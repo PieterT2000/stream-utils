@@ -1,7 +1,8 @@
 import "./styles/style.css";
-import { MAX_SESSIONS, SESSION_LENGTH } from "./consts.js";
+import { MAX_SESSIONS, PAUSE_LENGTH, SESSION_LENGTH } from "./consts.js";
 const dateEl = document.getElementById("date");
 const timeEl = document.getElementById("time");
+const sessionCountPrefix = document.querySelector(".count-prefix")
 const sessionCountEl = document.getElementById("count");
 const sessionTimerEl = document.getElementById("timer");
 const startAlarm = new Audio("/start.mp3");
@@ -16,6 +17,8 @@ startAlarm.addEventListener("canplaythrough", function () {
 const localStorageKey = "startDateTime";
 
 let doBreak = false;
+
+const TOTAL_LENGTH = SESSION_LENGTH + PAUSE_LENGTH;
 
 const padDigit = (num) => (num < 10 ? "0" : "") + num;
 
@@ -51,15 +54,18 @@ function storeStartTime() {
 }
 function renderSessionCount() {
   if (doBreak) {
-    sessionCountEl.textContent = "Break";
+    sessionCountPrefix.textContent = "Break!";
+    sessionCountEl.textContent = "";
     return;
+  } else {
+    sessionCountPrefix.textContent = "Session";
   }
   const storedStartDateTime = localStorage.getItem(localStorageKey);
   if (storedStartDateTime) {
     const { time } = JSON.parse(storedStartDateTime);
     const now = new Date();
     const diff = now.getTime() - time;
-    const diffInHours = Math.ceil(diff / 1000 / 60 / 60);
+    const diffInHours = Math.ceil(diff / 1000 / TOTAL_LENGTH);
     sessionCountEl.textContent = `${diffInHours}/${MAX_SESSIONS}`;
   }
 }
@@ -90,17 +96,17 @@ function renderSessionTimer() {
     const diff = now.getTime() - time;
     const diffInSecs = Math.floor(diff / 1000);
     // in pomodoro or break
-    if (diffInSecs % 3600 < SESSION_LENGTH) {
+    if (diffInSecs % TOTAL_LENGTH < SESSION_LENGTH) {
       // still in pomodoro
       // play alarm at the start
-      if (diffInSecs % 3600 <= 1) {
+      if (diffInSecs % TOTAL_LENGTH <= 1) {
         doBreak = false;
-        if (diffInSecs >= 3600) {
+        if (diffInSecs >= TOTAL_LENGTH) {
           // don't play at the very start but from the start of the second hour onwards
           playAudio(startAlarm);
         }
       }
-      const remaining = SESSION_LENGTH - (diffInSecs % 3600);
+      const remaining = SESSION_LENGTH - (diffInSecs % TOTAL_LENGTH);
       sessionTimerEl.textContent = prettyTime(remaining);
     } else {
       // in break
@@ -108,7 +114,7 @@ function renderSessionTimer() {
         playAudio(pauseAlarm);
         doBreak = true;
       }
-      const remaining = 10 * 60 + SESSION_LENGTH - (diffInSecs % 3600);
+      const remaining = PAUSE_LENGTH + SESSION_LENGTH - (diffInSecs % TOTAL_LENGTH);
       sessionTimerEl.textContent = prettyTime(remaining);
     }
   }
@@ -121,4 +127,4 @@ function render() {
 }
 
 storeStartTime();
-setInterval(render, 1000);
+setInterval(render, 100);
