@@ -2,7 +2,8 @@
 
 React-based Pomodoro timer for study/work-with-me live streams on OBS.
 
-<hr>
+---
+
 ![Screenshot](public/image.png)
 
 ## Features
